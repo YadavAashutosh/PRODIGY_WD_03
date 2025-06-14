@@ -1,0 +1,455 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .card {
+            width: 250px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .emoji {
+            font-size: 28px; 
+            margin-bottom: 10px;
+        }
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .play-btn {
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+            background-color: #4caf50;
+            color: white;
+            transition: 0.3s;
+        }
+        .play-btn:hover {
+            background-color: #388e3c;
+        }
+        /* Team Section */
+        .team-container {
+            margin-top: 50px;
+            width: 70%;  /* Increased width for better balance */
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .team-title {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #444;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .team-list {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .team-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 20px;
+            width: 250px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            text-align: center;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .team-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            font-family: 'Poppins', sans-serif;
+        }
+        .enrollment {
+            font-size: 14px;
+            color: #555;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            text-align: center;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .menu {
+            margin-top: 50px;
+        }
+        .menu button, .buttons button {
+            padding: 12px 18px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 10px;
+            background-color: #4caf50;
+            color: white;
+            transition: 0.3s;
+        }
+        .menu button:hover, .buttons button:hover {
+            background-color: #388e3c;
+        }
+        .Boar {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin: 20px auto;
+            width: 320px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            font-size: 2.5em;
+            text-align: center;
+            line-height: 100px;
+            border: 2px solid #666;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+        .cell:hover {
+            transform: scale(1.1);
+        }
+        .cell.taken {
+            pointer-events: none;
+            background-color: #ddd;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+        .popup h2 {
+            margin-bottom: 10px;
+        }
+        .popup button {
+            padding: 12px 18px;
+            border: none;
+            background: #2196f3;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .popup button:hover {
+            background: #1976d2;
+        }
+        .game-container {
+            display: none;
+        }
+        .scoreBoar {
+            margin: 10px auto;
+            padding: 10px;
+            background: #eee;
+            display: inline-block;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .menu button, .buttons button {
+            padding: 12px 18px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 10px;
+            background-color: #4caf50;
+            color: white;
+            transition: 0.3s;
+        }
+        .menu button:hover, .buttons button:hover {
+            background-color: #388e3c;
+        }
+    
+        .dark {
+            background-color: #769656;
+        }
+        .light {
+            background-color: #eeeed2;
+        }
+        .selected {
+            background-color: yellow !important;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .popup button {
+            padding: 12px 18px;
+            border: none;
+            background: #2196f3;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .popup button:hover {
+            background: #1976d2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tic-Tac-Toe Game</h1>
+
+  
+<div class="container">
+    <div class="card" onclick="startGame()">
+        <div class="emoji">🎮</div>
+        <h2>Play Tic-Tac-Toe</h2>
+        <button class="startGame">Play Now</button>
+    </div>
+
+    <div class="game-container" id="gameContainer">
+        <div class="scoreBoar">
+            Score - You: <span id="playerScore">0</span> | 🤖: <span id="aiScore">0</span>
+        </div>
+        <div class="Boar" id="Boar"></div>
+        <div class="buttons">
+            <button onclick="resetGame()">Restart</button>
+            <button onclick="goBacks()">Back to Menu</button>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2 id="popupMessage"></h2>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+</div>
+
+<div class="menu">
+</div>
+
+<div class="chess-container" id="chessContainer" style="display: none;">
+    <div class="chessboard" id="chessboard"></div>
+    <div class="buttons">
+        <button onclick="resetChess()">Restart</button>
+        <button onclick="goBack()">Back to Menu</button>
+    </div>
+</div>
+
+    <script>
+       let Boar = ["", "", "", "", "", "", "", "", ""];
+        const human = "🙂";
+        const ai = "🤖";
+        let playerScore = 0;
+        let aiScore = 0;
+
+        function startGame() {
+            document.querySelector(".menu").style.display = "none";
+            document.getElementById("gameContainer").style.display = "block";
+            resetGame();
+        }
+
+        function goBacks() {
+            document.querySelector(".menu").style.display = "block";
+            document.getElementById("gameContainer").style.display = "none";
+            resetGame();
+        }
+
+        function createBoar() {
+            let BoarDiv = document.getElementById("Boar");
+            BoarDiv.innerHTML = "";
+            Boar.forEach((cell, index) => {
+                let cellDiv = document.createElement("div");
+                cellDiv.classList.add("cell");
+                cellDiv.dataset.index = index;
+                cellDiv.addEventListener("click", humanMove, { once: true });
+                cellDiv.innerText = cell;
+                BoarDiv.appendChild(cellDiv);
+            });
+        }
+
+        function humanMove(event) {
+            let index = event.target.dataset.index;
+            if (Boar[index] === "") {
+                Boar[index] = human;
+                event.target.innerText = human;
+                event.target.classList.add("taken");
+
+                if (checkWinner(Boar, human)) {
+                    playerScore++;
+                    updateScore();
+                    setTimeout(() => showPopup("You Win! 🎉"), 100);
+                    return;
+                }
+
+                if (Boar.every(cell => cell !== "")) {
+                    setTimeout(() => showPopup("It's a Tie! 😐"), 100);
+                    return;
+                }
+
+                setTimeout(aiMove, 500);
+            }
+        }
+
+        function aiMove() {
+            let bestMove = minimax(Boar, ai).index;
+            Boar[bestMove] = ai;
+            let aiCell = document.querySelector(`[data-index='${bestMove}']`);
+            aiCell.innerText = ai;
+            aiCell.classList.add("taken");
+
+            if (checkWinner(Boar, ai)) {
+                aiScore++;
+                updateScore();
+                setTimeout(() => showPopup("AI Wins! 🤖🏆"), 100);
+                return;
+            }
+
+            if (Boar.every(cell => cell !== "")) {
+                setTimeout(() => showPopup("It's a Tie! 😐"), 100);
+            }
+        }
+
+        function minimax(newBoar, player) {
+            let availableSpots = newBoar.map((val, idx) => val === "" ? idx : null).filter(v => v !== null);
+
+            if (checkWinner(newBoar, human)) return { score: -10 };
+            if (checkWinner(newBoar, ai)) return { score: 10 };
+            if (availableSpots.length === 0) return { score: 0 };
+
+            let moves = [];
+            for (let i of availableSpots) {
+                let move = { index: i };
+                newBoar[i] = player;
+
+                let result = minimax(newBoar, player === ai ? human : ai);
+                move.score = result.score;
+
+                newBoar[i] = "";
+                moves.push(move);
+            }
+
+            return moves.reduce((best, move) =>
+                (player === ai ? move.score > best.score : move.score < best.score) ? move : best
+            );
+        }
+
+        function checkWinner(Boar, player) {
+            return [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ].some(pattern => pattern.every(index => Boar[index] === player));
+        }
+
+        function showPopup(message) {
+            document.getElementById("popupMessage").innerText = message;
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            resetGame();
+        }
+
+        function resetGame() {
+            Boar.fill("");
+            createBoar();
+        }
+
+        function updateScore() {
+            document.getElementById("playerScore").innerText = playerScore;
+            document.getElementById("aiScore").innerText = aiScore;
+        }
+
+        document.addEventListener("DOMContentLoaded", createBoar);
+
+    </script>
+
+</body>
+</html>
